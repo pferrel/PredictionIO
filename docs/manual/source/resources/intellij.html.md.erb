@@ -134,15 +134,35 @@ The end result should look something similar to this.
 
 ![Run Configuration](/images/intellij/intellij-config.png)
 
-Save and you can run or debug `pio train` with the new configuration!
+Save and you are ready to run or debug as if you were executing the `pio train` script with the new configuration.
+
+INFO: Before running any `debug` or `run` config make sure the pio service is running. Check with `pio status` and 
+start with `pio-start-all`
 
 
 ### Simulating `pio deploy`
 
-For `pio deploy`, simply duplicate the previous configuration and replace with
-the following.
+The deploy part of the workflow expect you to have run `build` and `train` first. 
+These will create a `manifest.json`in your engine directory. It looks something like this:
+
+```
+{
+  "id":"**id_string**",
+  "version":"**version_string**",
+  "name":"**name_string**",
+  "description":"pio-autogen-manifest",
+  "files":[],
+  "engineFactory":""
+}
+```
+
+For `pio deploy`, simply duplicate the previous configuration. In the new configuration
+replace the main class as shown, then using the `id` and `version` from the manifest, and the `engineInstanceID` 
+from the `train` you ran above. 
 
 ```
 Main class: io.prediction.workflow.CreateServer
-Program Arguments: --engineInstanceId **replace_with_the_id_from_pio_train**
+Program Arguments: --engineInstanceId **replace_with_the_id_from_pio_train 
+--engineId **replace_with_manifest_id_string**
+--engineVersion **replace_with_manifest_version_string**
 ```
