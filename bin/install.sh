@@ -285,19 +285,20 @@ echo "JAVA_HOME is now set to: $JAVA_HOME"
 
 # PredictionIO
 echo -e "\033[1;36mStarting PredictionIO setup in:\033[0m $pio_dir"
+cp ${PIO_FILE} ${TEMP_DIR}
 cd ${TEMP_DIR}
 
 # delete existing tmp file before download again
-if [[ -e  ${PIO_FILE} ]]; then
-  if confirm "Delete existing $PIO_FILE?"; then
-    rm ${PIO_FILE}
-  fi
-fi
+#if [[ -e  ${PIO_FILE} ]]; then
+#  if confirm "Delete existing $PIO_FILE?"; then
+#    rm ${PIO_FILE}
+#  fi
+#fi
 
-if [[ ! -e ${PIO_FILE} ]]; then
-  echo "Downloading PredictionIO..."
-  curl -O https://d8k1yxp8elc6b.cloudfront.net/${PIO_FILE}
-fi
+#if [[ ! -e ${PIO_FILE} ]]; then
+#  echo "Downloading PredictionIO..."
+#  curl -O https://d8k1yxp8elc6b.cloudfront.net/${PIO_FILE}
+#fi
 tar zxf ${PIO_FILE}
 rm -rf ${pio_dir}
 mv PredictionIO-${PIO_VERSION} ${pio_dir}
