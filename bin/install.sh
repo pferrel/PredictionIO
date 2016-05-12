@@ -9,7 +9,7 @@
 # License: http://www.apache.org/licenses/LICENSE-2.0
 
 OS=`uname`
-PIO_VERSION=aml-0.9.7
+PIO_VERSION=0.9.7-aml
 SPARK_VERSION=1.6.1
 # Looks like support for Elasticsearch 2.0 will require 2.0 so deferring
 ELASTICSEARCH_VERSION=1.7.5
