@@ -285,15 +285,17 @@ echo "JAVA_HOME is now set to: $JAVA_HOME"
 # PredictionIO
 echo -e "\033[1;36mStarting PredictionIO setup in:\033[0m $pio_dir"
 
-sh ./make-distribution.sh
-
-cp ${PIO_FILE} ${TEMP_DIR}
 cd ${TEMP_DIR}
 
 if [[ ! -e ${PIO_FILE} ]]; then
   echo "Downloading PredictionIO..."
-  curl -OL https://github.com/actionML/PredictionIO/releases/download/v${PIO_VERSION}/${PIO_FILE} 
+  curl -OL https://github.com/actionML/PredictionIO/archive/v${PIO_VERSION}.tar.gz 
 fi
+
+tar zxf v${PIO_VERSION}.tar.gz
+sh PredictionIO-${PIO_VERSION}/make-distribution.sh
+cp PredictionIO-${PIO_VERSION}/${PIO_FILE} ${TEMP_DIR}
+rm -r PredictionIO-${PIO_VERSION}
 
 tar zxf ${PIO_FILE}
 rm -rf ${pio_dir}
