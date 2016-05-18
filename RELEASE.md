@@ -1,14 +1,28 @@
-##Release Notes and News
+#PredictionIO-aml
 
-**Note:** For upgrade instructions please refer to [this page](/resources/upgrade/).
+This is tracks the history of the ActionML version of PredictionIO. It contains enhancements and features required to run the [Universal Recommender](https://github.com/actionml/template-scala-parallel-universal-recommendation).
 
-###v0.9.6
+**Note:** For upgrade instructions please refer to [these instructions](https://github.com/actionml/cluster-setup/blob/master/install.md).
 
-November, 2015 | [Release Notes](https://github.com/PredictionIO/PredictionIO/blob/master/RELEASE.md) have been moved to Github and you are reading them. For a detailed list of commits check [this page](https://github.com/PredictionIO/PredictionIO/commits/master)
+## Version History
 
-- Upgrade components for install/runtime to Hbase 1, Spark 1.5.2 PIO still runs on older HBase and Spark back to 1.3.1, upgrading install of Elaticsearch to 1.5.2 since pio run well on it but also runs on older versions.
+### 0.9.7-aml
+
+May 21, 2016
+
+ - changed version id so artifacts don't conflict with naming in the Salesforce sponsored project.
+ - bug fix in memory use during moving window event trim and compaction  EventStore data.
+ - update [install.sh](https://github.com/actionml/PredictionIO/blob/master/bin/install.sh) script for single line installs from this repo.
+ - branches being maintained for PredictionIO with SSL, and with Elasticsearch 2.X       
+ 
+### ActionML's PredictionIO v0.9.6
+
+March 26, 2016
+
+- Upgrade components for install/runtime to Hbase 1.X, Spark 1.5.2 PIO still runs on older HBase and Spark back to 1.3.1, upgrading install of Elasticsearch to 1.5.2 since pio run well on it but also runs on older versions.
 - Support for maintaining a moving window of events by discarding old events from the EventStore
 - Support for doing a deploy without creating a Spark Context
+
 
 ###v0.9.5 
 
