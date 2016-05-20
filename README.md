@@ -16,3 +16,7 @@ evaluation, querying predictive results via REST APIs. It is based on Spark and 
 
 PredictionIO is Open Source under [Apache 2
 license](http://www.apache.org/licenses/LICENSE-2.0.html).
+
+## Commercial Support
+
+Contact us at support at actionml dot com or go [here for a free consultation](http://actionml.com/#contact).
