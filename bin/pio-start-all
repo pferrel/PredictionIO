@@ -59,11 +59,14 @@ fi
 
 #PGSQL
 pgsqlStatus="$(ps auxwww | grep postgres | wc -l)"
-if [ "$pgsqlStatus" < 5 ]; then
+if [[ "$pgsqlStatus" < 5 ]]; then
   # Detect OS
   OS=`uname`
   if [[ "$OS" = "Darwin" ]]; then
-    pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
+    pg_cmd=`which pg_ctl`
+    if [[ "$pg_cmd" != "" ]]; then
+      pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
+    fi
   elif [[ "$OS" = "Linux" ]]; then
     sudo service postgresql start
   else

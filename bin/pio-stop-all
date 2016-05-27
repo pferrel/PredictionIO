@@ -47,7 +47,10 @@ fi
 #PGSQL
 OS=`uname`
 if [[ "$OS" = "Darwin" ]]; then
-  pg_ctl -D /usr/local/var/postgres stop -s -m fast
+  pg_cmd=`which pg_ctl`
+  if [[ "$pg_cmd" != "" ]]; then
+    pg_ctl -D /usr/local/var/postgres stop -s -m fast
+  fi
 elif [[ "$OS" = "Linux" ]]; then
   sudo service postgresql stop
 else
