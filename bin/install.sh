@@ -13,7 +13,7 @@ PIO_VERSION=0.9.7-aml
 SPARK_VERSION=1.6.1
 # Looks like support for Elasticsearch 2.0 will require 2.0 so deferring
 ELASTICSEARCH_VERSION=1.7.5
-HBASE_VERSION=1.1.3
+HBASE_VERSION=1.2.1
 POSTGRES_VERSION=9.4-1204.jdbc41
 MYSQL_VERSION=5.1.37
 PIO_DIR=$HOME/PredictionIO
@@ -289,10 +289,15 @@ cd ${TEMP_DIR}
 
 if [[ ! -e ${PIO_FILE} ]]; then
   echo "Downloading PredictionIO..."
-  curl -OL https://github.com/actionML/PredictionIO/archive/v${PIO_VERSION}.tar.gz 
+  curl -OL https://codeload.github.com/actionml/PredictionIO/tar.gz/master
 fi
 
+mv master v${PIO_VERSION}.tar.gz
+
 tar zxf v${PIO_VERSION}.tar.gz
+
+mv PredictionIO-master PredictionIO-${PIO_VERSION}
+
 sh PredictionIO-${PIO_VERSION}/make-distribution.sh
 cp PredictionIO-${PIO_VERSION}/${PIO_FILE} ${TEMP_DIR}
 rm -r PredictionIO-${PIO_VERSION}
