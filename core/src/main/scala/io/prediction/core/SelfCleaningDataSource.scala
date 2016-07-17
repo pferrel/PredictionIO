@@ -108,7 +108,7 @@ trait SelfCleaningDataSource {
       } ++ events.filter(!isSetEvent(_))
   }
 
-  def removePDuplicates(sc: SparkContext, rdd: RDD[Event]): RDD[Event] = {
+  def removePDuplicates(sc: SparkContext, rdd: RDD[Event]): RDD[Event] = { 
     val now = DateTime.now()
     rdd.map(x => 
       (recreateEvent(x, None, now), (x.eventId, x.eventTime)))
@@ -141,16 +141,19 @@ trait SelfCleaningDataSource {
     * @return RDD[Event] most recent PEvents
     */
   @DeveloperApi
-  def cleanPersistedPEvents(sc: SparkContext): RDD[Event] ={
-    val result = cleanPEvents(sc)
-    val originalEvents = PEventStore.find(appName)(sc)
-    val newEvents = result subtract originalEvents
-    val eventsToRemove = (originalEvents subtract result).map { case e =>
-      e.eventId.getOrElse("")
+  def cleanPersistedPEvents(sc: SparkContext): Unit ={
+     eventWindow match {
+      case Some(ew) => 
+        val result = cleanPEvents(sc)
+        val originalEvents = PEventStore.find(appName)(sc)
+        val newEvents = result subtract originalEvents
+        val eventsToRemove = (originalEvents subtract result).map { case e =>
+          e.eventId.getOrElse("")
+        }
+
+        wipePEvents(newEvents, eventsToRemove, sc)
+       case None =>
     }
-    
-    wipePEvents(newEvents, eventsToRemove, sc)
-    result
   }
   
    /**
@@ -170,7 +173,7 @@ trait SelfCleaningDataSource {
     removePEvents(eventsToRemove, appId)
   }
 
-  def removeEvents(eventsToRemove: Set[String], appId: Int){
+  def removeEvents(eventsToRemove: Set[String], appId: Int) {
     val listOfFuture: List[Future[Boolean]] = eventsToRemove.filter(x =>  x != "").toList.map { case eventId =>
         lEventsDb.futureDelete(eventId, appId)
     }
@@ -179,15 +182,13 @@ trait SelfCleaningDataSource {
     Await.result(futureOfList, scala.concurrent.duration.Duration(60, "minutes"))
   }
 
-  def removePEvents(eventsToRemove: RDD[String], appId: Int){
-    val listOfFuture: RDD[Future[Boolean]] = eventsToRemove.filter(x =>  x != "").map { case eventId =>
-        lEventsDb.futureDelete(eventId, appId)
+  def removePEvents(eventsToRemove: RDD[String], appId: Int) { 
+    val listOfFuture: List[Future[Boolean]] = eventsToRemove.collect.filter(x =>  x != "").toList.map { case eventId => 
+      lEventsDb.futureDelete(eventId, appId)
     }
 
-    listOfFuture.mapPartitions[Boolean] { f: Iterator[Future[Boolean]] =>
-      val future: Future[Iterator[Boolean]] = Future sequence f
-      Await result (future, scala.concurrent.duration.Duration(60, "minutes"))
-  }
+    val futureOfList: Future[List[Boolean]] = Future.sequence(listOfFuture)
+    Await.result(futureOfList, scala.concurrent.duration.Duration(60, "minutes"))
 }
 
 
@@ -243,17 +244,21 @@ trait SelfCleaningDataSource {
     * @return Iterator[Event] most recent LEvents
     */
   @DeveloperApi
-  def cleanPersistedLEvents: Iterable[Event] = {
-    val result = cleanLEvents().toSet
-    val originalEvents = LEventStore.find(appName).toSet
-    val newEvents = result -- originalEvents
-    val eventsToRemove = (originalEvents -- result).map { case e =>
-      e.eventId.getOrElse("")
+  def cleanPersistedLEvents: Unit = {
+    eventWindow match {
+      case Some(ew) =>
+
+        val result = cleanLEvents().toSet
+        val originalEvents = LEventStore.find(appName).toSet
+        val newEvents = result -- originalEvents
+        val eventsToRemove = (originalEvents -- result).map { case e =>
+          e.eventId.getOrElse("")
+        }
+
+        wipe(newEvents, eventsToRemove)
+  
+       case None =>
     }
-
-    wipe(newEvents, eventsToRemove)
-
-    result
   }
 
   /** :: DeveloperApi ::
