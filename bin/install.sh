@@ -13,7 +13,7 @@ PIO_VERSION=0.9.7-aml
 SPARK_VERSION=1.6.1
 # Looks like support for Elasticsearch 2.0 will require 2.0 so deferring
 ELASTICSEARCH_VERSION=1.7.5
-HBASE_VERSION=1.1.3
+HBASE_VERSION=1.1.5
 POSTGRES_VERSION=9.4-1204.jdbc41
 MYSQL_VERSION=5.1.37
 PIO_DIR=$HOME/PredictionIO
