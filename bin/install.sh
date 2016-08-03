@@ -290,17 +290,18 @@ cd ${TEMP_DIR}
 if [[ ! -e ${PIO_FILE} ]]; then
   echo "Downloading PredictionIO..."
   curl -OL https://codeload.github.com/actionml/PredictionIO/tar.gz/master
+
+  mv master v${PIO_VERSION}.tar.gz
+
+  tar zxf v${PIO_VERSION}.tar.gz
+
+
+  mv PredictionIO-master PredictionIO-${PIO_VERSION}
+
+  sh PredictionIO-${PIO_VERSION}/make-distribution.sh
+  cp PredictionIO-${PIO_VERSION}/${PIO_FILE} ${TEMP_DIR}
+  rm -r PredictionIO-${PIO_VERSION}
 fi
-
-mv master v${PIO_VERSION}.tar.gz
-
-tar zxf v${PIO_VERSION}.tar.gz
-
-mv PredictionIO-master PredictionIO-${PIO_VERSION}
-
-sh PredictionIO-${PIO_VERSION}/make-distribution.sh
-cp PredictionIO-${PIO_VERSION}/${PIO_FILE} ${TEMP_DIR}
-rm -r PredictionIO-${PIO_VERSION}
 
 tar zxf ${PIO_FILE}
 rm -rf ${pio_dir}
@@ -336,7 +337,7 @@ echo -e "\033[1;32mSpark setup done!\033[0m"
 installPGSQL () {
   if [[ ${distribution} = "$DISTRO_DEBIAN" ]]; then
       echo -e "\033[1;36mInstalling PostgreSQL...\033[0m"
-      sudo apt-get install postgresql -y
+      sudo apt-get install postgresql-9.4 -y
       echo -e "\033[1;36mPlease use the default password 'pio' when prompted to enter one\033[0m"
       sudo -u postgres createdb pio
       sudo -u postgres createuser -P pio

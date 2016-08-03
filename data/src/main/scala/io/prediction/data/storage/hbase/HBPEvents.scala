@@ -19,7 +19,7 @@ import io.prediction.data.storage.Event
 import io.prediction.data.storage.PEvents
 import io.prediction.data.storage.StorageClientConfig
 import org.apache.hadoop.hbase.{TableName, HBaseConfiguration}
-import org.apache.hadoop.hbase.client.Result
+import org.apache.hadoop.hbase.client.{HTable, Delete, Result}
 import org.apache.hadoop.hbase.io.ImmutableBytesWritable
 import org.apache.hadoop.hbase.mapreduce.PIOHBaseUtil
 import org.apache.hadoop.hbase.mapreduce.TableInputFormat
@@ -107,5 +107,27 @@ class HBPEvents(client: HBClient, config: StorageClientConfig, namespace: String
       (new ImmutableBytesWritable(rowKey.toBytes), put)
     }.saveAsNewAPIHadoopDataset(conf)
 
+  }
+
+  def delete(
+    eventIds: RDD[String], appId: Int, channelId: Option[Int])(sc: SparkContext): Unit = {
+
+    checkTableExists(appId, channelId)
+
+    val tableName = HBEventsUtil.tableName(namespace, appId, channelId) 
+ 
+    eventIds.foreachPartition{ iter =>
+      val conf = HBaseConfiguration.create()
+      conf.set(TableOutputFormat.OUTPUT_TABLE,
+        tableName)
+
+      val table = new HTable(conf, tableName)
+      iter.foreach { id =>
+        val rowKey = HBEventsUtil.RowKey(id)
+        val delete = new Delete(rowKey.b)
+        table.delete(delete)
+      }
+      table.close 
+    } 
   }
 }
