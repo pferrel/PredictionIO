@@ -18,9 +18,9 @@ import UnidocKeys._
 
 name := "pio"
 
-version in ThisBuild := "0.9.7-aml"
+version in ThisBuild := "0.10.0-snapshot"
 
-organization in ThisBuild := "io.prediction"
+organization in ThisBuild := "org.apache"
 
 scalaVersion in ThisBuild := "2.10.5"
 
