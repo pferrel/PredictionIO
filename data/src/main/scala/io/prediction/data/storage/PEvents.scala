@@ -179,4 +179,8 @@ trait PEvents extends Serializable {
     */
   @DeveloperApi
   def write(events: RDD[Event], appId: Int, channelId: Option[Int])(sc: SparkContext): Unit
+
+  @DeveloperApi 
+  def delete(eventIds: RDD[String], appId: Int, channelId: Option[Int])(sc: SparkContext): Unit
+
 }

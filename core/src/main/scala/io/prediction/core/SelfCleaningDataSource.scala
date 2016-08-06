@@ -170,7 +170,7 @@ trait SelfCleaningDataSource {
   
     pEventsDb.write(newEvents, appId)(sc)
   
-    removePEvents(eventsToRemove, appId)
+    removePEvents(eventsToRemove, appId, sc)
   }
 
   def removeEvents(eventsToRemove: Set[String], appId: Int) {
@@ -182,14 +182,9 @@ trait SelfCleaningDataSource {
     Await.result(futureOfList, scala.concurrent.duration.Duration(60, "minutes"))
   }
 
-  def removePEvents(eventsToRemove: RDD[String], appId: Int) { 
-    val listOfFuture: List[Future[Boolean]] = eventsToRemove.collect.filter(x =>  x != "").toList.map { case eventId => 
-      lEventsDb.futureDelete(eventId, appId)
-    }
-
-    val futureOfList: Future[List[Boolean]] = Future.sequence(listOfFuture)
-    Await.result(futureOfList, scala.concurrent.duration.Duration(60, "minutes"))
-}
+  def removePEvents(eventsToRemove: RDD[String], appId: Int, sc: SparkContext) { 
+    pEventsDb.delete(eventsToRemove.filter(x =>  x != ""), appId, None)(sc)
+  }
 
 
    /**
