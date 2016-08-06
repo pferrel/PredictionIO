@@ -1,21 +1,36 @@
-#PredictionIO-aml
+#Release Notes and News
 
-This is tracks the history of the ActionML version of PredictionIO. It contains enhancements and features required to run the [Universal Recommender](https://github.com/actionml/template-scala-parallel-universal-recommendation).
-
-**Note:** For upgrade instructions please refer to [these instructions](https://github.com/actionml/cluster-setup/blob/master/install.md).
+**Note:** For upgrade instructions please refer to [this page](http://predictionio.incubator.apache.org/resources/upgrade/).
 
 ## Version History
 
-### 0.9.7-aml
+### 0.10.0
 
-May 21, 2016
+Aug ??, 2016
+
+ - Make SSL optional
+ - Merge ActionML fork
+ - First Apache PredictionIO (incubating) release
+
+### 0.9.7-aml (ActionML fork)
+
+Aug 5, 2016
 
  - changed version id so artifacts don't conflict with naming in the Salesforce sponsored project.
  - bug fix in memory use during moving window event trim and compaction  EventStore data.
- - update [install.sh](https://github.com/actionml/PredictionIO/blob/master/bin/install.sh) script for single line installs from this repo.
- - branches being maintained for PredictionIO with SSL, and with Elasticsearch 2.X       
+ - update [install.sh](https://github.com/actionml/PredictionIO/blob/master/bin/install.sh) script for single line installs with options that support various combinations required by some templates.
  
-### ActionML's PredictionIO v0.9.6
+### v0.9.6
+
+April 11, 2015 
+
+For a detailed list of commits check [this page](https://github.com/apache/incubator-predictionio/commits/master)
+
+- Upgrade components for install/runtime to Hbase 1, Spark 1.5.2 PIO still runs on older HBase and Spark back to 1.3.1, upgrading install of Elaticsearch to 1.5.2 since pio run well on it but also runs on older versions.
+- Support for maintaining a moving window of events by discarding old events from the EventStore
+- Support for doing a deploy without creating a Spark Context
+
+### v0.9.6 (ActionML fork)
 
 March 26, 2016
 
@@ -23,10 +38,11 @@ March 26, 2016
 - Support for maintaining a moving window of events by discarding old events from the EventStore
 - Support for doing a deploy without creating a Spark Context
 
-
 ###v0.9.5 
 
-October 14th, 2015 | [Release Notes](https://github.com/PredictionIO/PredictionIO/blob/master/RELEASE.md) have been moved to Github and you are reading them. For a detailed list of commits check [this page](https://github.com/PredictionIO/PredictionIO/commits/v0.9.5)
+October 14th, 2015 
+
+[Release Notes](https://github.com/apache/incubator-predictionio/blob/master/RELEASE.md) have been moved to Github and you are reading them. For a detailed list of commits check [this page](https://github.com/apache/incubator-predictionio/commits/v0.9.5)
 
 - Support batches of events sent to the EventServer as json arrays
 - Support creating an Elasticsearch StorageClient created for an Elasticsearch cluster from variables in pio-env.sh
@@ -34,7 +50,9 @@ October 14th, 2015 | [Release Notes](https://github.com/PredictionIO/PredictionI
 
 ###v0.9.4
 
-July 16th, 2015 | [Release Notes](https://predictionio.atlassian.net/jira/secure/ReleaseNote.jspa?projectId=10000&version=13700)
+July 16th, 2015
+
+[Release Notes](https://predictionio.atlassian.net/jira/secure/ReleaseNote.jspa?projectId=10000&version=13700)
 
 - Support event permissions with different access keys at the Event Server interface
 - Support detection of 3rd party Apache Spark distributions
@@ -43,7 +61,10 @@ July 16th, 2015 | [Release Notes](https://predictionio.atlassian.net/jira/secure
 
 ###v0.9.3
 
-May 20th, 2015 | [Release Notes](https://predictionio.atlassian.net/jira/secure/ReleaseNote.jspa?projectId=10000&version=13600)
+May 20th, 2015
+
+
+[Release Notes](https://predictionio.atlassian.net/jira/secure/ReleaseNote.jspa?projectId=10000&version=13600)
 
 - Add support of developing prediction engines in Java
 - Add support of PostgreSQL and MySQL
@@ -53,7 +74,9 @@ May 20th, 2015 | [Release Notes](https://predictionio.atlassian.net/jira/secure/
 
 ###v0.9.2
 
-April 14th, 2015 | [Release Notes](https://predictionio.atlassian.net/jira/secure/ReleaseNote.jspa?projectId=10000&version=13500)
+April 14th, 2015
+
+[Release Notes](https://predictionio.atlassian.net/jira/secure/ReleaseNote.jspa?projectId=10000&version=13500)
 
 - Channels in the Event Server
 - Spark 1.3+ support (upgrade to Spark 1.3+ required)
@@ -63,14 +86,18 @@ April 14th, 2015 | [Release Notes](https://predictionio.atlassian.net/jira/secur
 
 ###v0.9.1
 
-March 17th, 2015 | [Releaes Notes](https://predictionio.atlassian.net/jira/secure/ReleaseNote.jspa?projectId=10000&version=13401)
+March 17th, 2015
+
+[Releaes Notes](https://predictionio.atlassian.net/jira/secure/ReleaseNote.jspa?projectId=10000&version=13401)
 
 - Improved `pio-start-all`
 - Fixed a bug where `pio build` failed to set PredictionIO dependency version for engine templates
 
 ###v0.9.0
 
-March 4th, 2015 | [Release Notes](https://predictionio.atlassian.net/jira/secure/ReleaseNote.jspa?projectId=10000&version=13400)
+March 4th, 2015
+
+[Release Notes](https://predictionio.atlassian.net/jira/secure/ReleaseNote.jspa?projectId=10000&version=13400)
 
 - [E-Commerce Recommendation Template](http://templates.prediction.io/PredictionIO/template-scala-parallel-ecommercerecommendation) which includes 1) out-of-stock items support 2) new user recommendation 3) unseen items only
 - [Complementary Purchase Template](http://templates.prediction.io/PredictionIO/template-scala-parallel-complementarypurchase) for shopping cart recommendation
@@ -79,7 +106,9 @@ March 4th, 2015 | [Release Notes](https://predictionio.atlassian.net/jira/secure
 
 ###v0.8.6
 
-Feb 10th, 2015 | [Release Notes](https://predictionio.atlassian.net/jira/secure/ReleaseNote.jspa?projectId=10000&version=13300)
+Feb 10th, 2015
+
+[Release Notes](https://predictionio.atlassian.net/jira/secure/ReleaseNote.jspa?projectId=10000&version=13300)
 
 - New engine template - [Product Ranking](/templates/productranking/quickstart/) for personalized product listing
 - [CloudFormation deployment](/system/deploy-cloudformation/) available
