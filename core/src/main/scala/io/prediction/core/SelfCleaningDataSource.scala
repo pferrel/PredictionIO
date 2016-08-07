@@ -1,9 +1,9 @@
-package io.prediction.core
+package org.apache.predictionio.core
 
 import grizzled.slf4j.Logger
-import io.prediction.annotation.DeveloperApi
-import io.prediction.data.storage.{DataMap, Event,Storage}
-import io.prediction.data.store.{Common, LEventStore, PEventStore}
+import org.apache.predictionio.annotation.DeveloperApi
+import org.apache.predictionio.data.storage.{DataMap, Event,Storage}
+import org.apache.predictionio.data.store.{Common, LEventStore, PEventStore}
 import org.apache.spark.SparkContext
 import org.apache.spark.rdd.RDD
 import org.joda.time.DateTime
