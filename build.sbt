@@ -20,7 +20,7 @@ name := "pio"
 
 version in ThisBuild := "0.10.0-snapshot"
 
-organization in ThisBuild := "org.apache"
+organization in ThisBuild := "org.apache.predictionio"
 
 scalaVersion in ThisBuild := "2.10.5"
 
