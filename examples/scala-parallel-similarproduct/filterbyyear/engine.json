@@ -7,8 +7,9 @@
       "appId": 1
       "eventWindow": {
         "duration": "5 minutes",
-        "removeDuplicates":true,
-        "compressProperties":true
+        "removeDuplicates": true,
+        "compressProperties": true
+      }
     }
   },
   "algorithms": [
