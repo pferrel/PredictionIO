@@ -298,14 +298,11 @@ cd ${TEMP_DIR}
 
 if [[ ! -e ${PIO_FILE} ]]; then
   echo "Downloading PredictionIO..."
-  curl -OL https://codeload.github.com/actionml/PredictionIO/tar.gz/master
+  curl -OL https://codeload.github.com/apache/incubator-predictionio/tar.gz/develop
 
-  mv master v${PIO_VERSION}.tar.gz
+  tar zxf incubator-predictionio-develop.tar.gz 
 
-  tar zxf v${PIO_VERSION}.tar.gz
-
-
-  mv PredictionIO-master PredictionIO-${PIO_VERSION}
+  mv incubator-predictionio-develop PredictionIO-${PIO_VERSION}
 
   sh PredictionIO-${PIO_VERSION}/make-distribution.sh
   cp PredictionIO-${PIO_VERSION}/${PIO_FILE} ${TEMP_DIR}

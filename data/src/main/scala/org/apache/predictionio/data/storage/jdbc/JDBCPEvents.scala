@@ -159,7 +159,7 @@ class JDBCPEvents(client: String, config: StorageClientConfig, namespace: String
     val prop = new java.util.Properties
     prop.setProperty("user", config.properties("USERNAME"))
     prop.setProperty("password", config.properties("PASSWORD"))
-    eventDF.write.mode(SaveMode.Overwrite).jdbc(client, tableName, prop)
+    eventDF.write.mode(SaveMode.Append).jdbc(client, tableName, prop)
   }
 
   def delete(eventIds: RDD[String], appId: Int, channelId: Option[Int])(sc: SparkContext): Unit = {
