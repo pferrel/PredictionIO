@@ -17,12 +17,19 @@ limitations under the License.
 
 This product includes software, code and tests from the following projects:
 
+================================================================================
+                        Apache Projects
+================================================================================
+
   - Apache Commons - http://commons.apache.org/ - Copyright © 2014 The Apache Software Foundation
   - Apache Hadoop - http://hadoop.apache.org/ - Copyright © 2014 The Apache Software Foundation
   - Apache HBase - http://hbase.apache.org/ - Copyright © 2014 The Apache Software Foundation
   - Apache Mahout - http://mahout.apache.org/ - Copyright © 2014 The Apache Software Foundation
   - Apache Spark - http://spark.apache.org/ - Copyright © 2014 The Apache Software Foundation
-  - Casbah - http://mongodb.github.io/casbah/ - Copyright © 2010 MongoDB, Inc.
+
+================================================================================
+                        non-Apache
+
   - Chill - https://engineering.twitter.com/opensource/projects/chill - Copyright © 2012 Twitter, Inc.
   - Elasticsearch - http://www.elasticsearch.org/ - Copyright © 2014 Elasticsearch
   - Grizzled-SLF4J - http://software.clapper.org/grizzled-slf4j/ - Copyright © 2010 Brian M. Clapper
@@ -37,5 +44,6 @@ This product includes software, code and tests from the following projects:
   - scopt - https://github.com/scopt/scopt - Copyright © 2010 Google
   - semverfi - https://github.com/softprops/semverfi - Copyright © 2012 Doug Tangren
   - specs2 - http://etorreborre.github.io/specs2/ - Copyright © 2014 Eric Torreborre
-  - spray - http://spray.io/ - Copyright © 2014 Typesafe, Inc.
+  * spray - Copyright © 2011-2015 the spray project <http://spray.io>
+  * akka - Copyright 2009-2016 Lightbend Inc. [http://www.lightbend.com]
   - typetools - https://github.com/jhalterman/typetools/ - Copyright © 2010-2013 Jonathan Halterman
